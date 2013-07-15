@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="648895586">
+    <data-source source="LOCAL" name="Django default" product="PostgreSQL" version="9.2.4" jdbc-version="3.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.1 JDBC3 (build 901)" uuid="aeb1b5f1-82d2-43fb-b075-f529d1bd3de0">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:fertility</jdbc-url>
+      <user-name>fertilityuser</user-name>
+      <user-password>dfccdfcfdfd8dfdedfc3dfc6dfc3dfdedfd3</user-password>
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.PyCharm20/config/jdbc-drivers/postgresql-driver-license.txt</url>
+        </library>
+        <library>
+          <url>jar://$USER_HOME$/.PyCharm20/config/jdbc-drivers/postgresql-9.1-901.jdbc3.jar!/</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>
+
