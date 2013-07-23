@@ -6,13 +6,14 @@ from django.db import models
 
 class Patient(models.Model):
     user = models.OneToOneField(User)
-    height = models.SmallIntegerField()
+    birthday = models.DateField()
+    height = models.SmallIntegerField()  # cm
 
 
 class Record(models.Model):
     patient = models.ForeignKey(Patient)
     datetime = models.DateTimeField(auto_now=True)
-    weight = models.PositiveSmallIntegerField()
+    weight = models.DecimalField(max_digits=2, decimal_places=1)  # kg
     amh = models.PositiveSmallIntegerField()  # nanogram per millilitre, ng/mL
     fsh = models.DecimalField(max_digits=5, decimal_places=2)  # international units per litre, IU/L
     tsh = models.DecimalField(max_digits=2, decimal_places=1)  # micro-international units per millilitre
