@@ -10,6 +10,14 @@ class Patient(models.Model):
     height = models.SmallIntegerField()  # cm
 
 
+class PregnancyOutcome(models.Model):
+    name = models.CharField
+
+
+class Pregnancy(models.Model):
+    outcome = models.ForeignKey(PregnancyOutcome)
+
+
 class Record(models.Model):
     patient = models.ForeignKey(Patient)
     datetime = models.DateTimeField(auto_now=True)
@@ -19,15 +27,10 @@ class Record(models.Model):
     tsh = models.DecimalField(max_digits=2, decimal_places=1)  # micro-international units per millilitre
     estrogen = models.SmallIntegerField()  # pg/mL
     regularity = models.PositiveSmallIntegerField()  # deviance of the regular menstrual cycle length in days
+    pregnancies = models.ForeignKey(Pregnancy)
 
 
-class Pregnancy(models.Model):
-    record = models.ForeignKey(Record)
-    outcome = models.ForeignKey(PregnancyOutcome)
 
-
-class PregnancyOutcome(models.Model):
-    name = models.CharField
 
 
 # class Spermiogram(models.Model):

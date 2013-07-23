@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-from FertCalculator import views
+from FertCalculator import forms
 
 admin.autodiscover()
 
@@ -17,7 +17,12 @@ urlpatterns = patterns('',
                        # Uncomment the next line to enable the admin:
                        url(r'^admin/', admin.site.urls),
 
-                       # Form
-                       url(r'^calculator/$', views.CalculatorWizard.as_view([views.forms.FertilityForm,
-                                                                             views.forms.SpermiogramForm])),
+                       # Wizard
+                       url(r'^calculator/$', forms.ContactWizard([forms.NewUserForm,
+                                                                  forms.BMIForm,
+                                                                  forms.AMHForm,
+                                                                  forms.FSHForm,
+                                                                  forms.TSHForm,
+                                                                  forms.OestrogenForm,
+                                                                  forms.RegularityOfTheMenstrualCycleForm])),
                        )
