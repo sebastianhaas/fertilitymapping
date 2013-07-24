@@ -11,11 +11,7 @@ class Patient(models.Model):
 
 
 class PregnancyOutcome(models.Model):
-    name = models.CharField
-
-
-class Pregnancy(models.Model):
-    outcome = models.ForeignKey(PregnancyOutcome)
+    name = models.CharField(max_length=200)
 
 
 class Record(models.Model):
@@ -26,11 +22,12 @@ class Record(models.Model):
     fsh = models.DecimalField(max_digits=5, decimal_places=2)  # international units per litre, IU/L
     tsh = models.DecimalField(max_digits=2, decimal_places=1)  # micro-international units per millilitre
     estrogen = models.SmallIntegerField()  # pg/mL
-    regularity = models.PositiveSmallIntegerField()  # deviance of the regular menstrual cycle length in days
-    pregnancies = models.ForeignKey(Pregnancy)
+    menstrual_cycle = models.PositiveSmallIntegerField()  # length of the menstrual cycle in days
 
 
-
+class Pregnancy(models.Model):
+    outcome = models.ForeignKey(PregnancyOutcome)
+    record = models.ForeignKey(Record)
 
 
 # class Spermiogram(models.Model):

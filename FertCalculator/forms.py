@@ -1,12 +1,4 @@
 from django import forms
-from django.contrib.formtools.wizard import FormWizard
-from django.http import HttpResponseRedirect
-
-
-class ContactWizard(FormWizard):
-    def done(self, request, form_list):
-        #do_something_with_the_form_data(form_list)
-        return HttpResponseRedirect('/page-to-redirect-to-when-done/')
 
 
 class NewUserForm(forms.Form):
