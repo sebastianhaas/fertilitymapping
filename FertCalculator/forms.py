@@ -7,7 +7,7 @@ class NewUserForm(forms.Form):
 
 
 class BMIForm(forms.Form):
-    weight = forms.DecimalField(min_value=30, max_value=300, decimal_places=1, max_digits=4)
+    weight = forms.DecimalField(min_value=30, max_value=300, decimal_places=1, max_digits=3)
 
 
 class AMHForm(forms.Form):
