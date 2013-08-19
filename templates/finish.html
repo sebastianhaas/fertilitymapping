@@ -1,0 +1,32 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% trans "Fertility Mapping" %}</title>
+</head>
+<body>
+{% blocktrans %}Your biological age is {{ biological_age }} years.{% endblocktrans %}
+
+{% if debug %}
+    <br/><br/>
+    <table border="0">
+        <tr>
+            <td>{% trans "BMI" %}</td>
+            <td>{{ debug_bmi }}</td>
+            <td>{{ debug_bmi_rating }}</td>
+        </tr>
+        <tr>
+            <td>{% trans "AMH" %}</td>
+            <td>{{ debug_amh }}</td>
+            <td>{{ debug_amh_rating }}</td>
+        </tr>
+        <tr>
+            <td>{% trans "FSH" %}</td>
+        </tr>
+        <tr>
+            <td>{% trans "TSH" %}</td>
+        </tr>
+    </table>
+{% endif %}
+</body>
+</html>

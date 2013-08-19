@@ -1,3 +1,5 @@
+# coding=utf-8
+
 # Django settings for Fertility project.
 
 DEBUG = True
@@ -90,6 +92,12 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
+)
+
+INTERNAL_IPS = (
+    "127.0.0.1",
+    "localhost",
+    "192.168.42.202",
 )
 
 MIDDLEWARE_CLASSES = (
