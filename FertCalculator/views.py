@@ -43,6 +43,7 @@ class ResultView(View):
         self.biological_age = 99.9
         self.rate_body_mass_index(record.patient.height, record.weight)
         self.rate_anti_muellerian_hormone(record.amh)
+        self.rate_follicle_stimulating_hormone(record.fsh)
         return render(request, 'finish.html', vars(self))
 
     def rate_body_mass_index(self, height, weight):
@@ -79,6 +80,42 @@ class ResultView(View):
         if settings.DEBUG:
             self.debug_amh = amh
             self.debug_amh_rating = result
+
+        return result
+
+    def rate_follicle_stimulating_hormone(self, fsh):
+
+        if 10 >= fsh >= 1:
+            result = 1
+        else:
+            result = 1.1
+
+        if settings.DEBUG:
+            self.debug_fsh = fsh
+            self.debug_fsh_rating = result
+
+        return result
+
+    def rate_thyroid_stimulating_hormone(self, tsh):
+
+        if 0 <= tsh <= 6:
+            if tsh <= 1:
+                result = 1
+            elif 1 < tsh < 1.5:
+                result = 1.1
+            elif 1.5 <= tsh <= 2.5:
+                #TODO add diagnostic warning tsh too high
+                result = 1.15
+            elif 2.5 < tsh <= 4:
+                #TODO add diagnostic warning tsh too high
+                result = 1.3
+            elif tsh > 4:
+                #TODO add diagnostic warning tsh too high
+                result = 1.6
+
+        if settings.DEBUG:
+            self.debug_tsh = tsh
+            self.debug_tsh_rating = result
 
         return result
 
