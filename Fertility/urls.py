@@ -21,6 +21,9 @@ urlpatterns = patterns('',
                                                                             forms.TSHForm,
                                                                             forms.OestrogenForm,
                                                                             forms.RegularityOfTheMenstrualCycleForm])),
+
+                       # The result view
+                       url(r'^result/', views.ResultView.as_view()),
                        )
 
 

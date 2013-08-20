@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.conf import settings
 from FertCalculator.models import *
+from decimal import *
 import os
 import binascii
 
@@ -32,22 +33,20 @@ class FertilityWizard(SessionWizardView):
         record.menstrual_cycle = form_dict['deviance']
         record.save()
 
-        return redirect('ResultView.as_view()', record_id=record.id)
-        #return HttpResponseRedirect('/result/')
+        self.request.session['result_id'] = record.id;
+        return HttpResponseRedirect('/result/')
 
 
 class ResultView(View):
-    record_id = None
-
     def get(self, request):
-        record = Record.objects.get(id=self.record_id)
+        record = Record.objects.get(id=self.request.session['result_id'])
         self.biological_age = 99.9
         self.rate_body_mass_index(record.patient.height, record.weight)
         self.rate_anti_muellerian_hormone(record.amh)
         return render(request, 'finish.html', vars(self))
 
     def rate_body_mass_index(self, height, weight):
-        bmi = weight / ((height / 100.0) * (height / 100.0))
+        bmi = weight / ((height / Decimal(100.0)) * (height / Decimal(100.0)))
 
         if 24.99 >= bmi >= 18.5:
             result = 1
