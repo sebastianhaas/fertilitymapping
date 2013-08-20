@@ -2,7 +2,7 @@
 
 from django.http import HttpResponseRedirect
 from django.contrib.formtools.wizard.views import SessionWizardView
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic.base import View
 from django.conf import settings
 from FertCalculator.models import *
@@ -33,7 +33,7 @@ class FertilityWizard(SessionWizardView):
         record.menstrual_cycle = form_dict['deviance']
         record.save()
 
-        self.request.session['result_id'] = record.id;
+        self.request.session['result_id'] = record.id
         return HttpResponseRedirect('/result/')
 
 
@@ -44,6 +44,8 @@ class ResultView(View):
         self.rate_body_mass_index(record.patient.height, record.weight)
         self.rate_anti_muellerian_hormone(record.amh)
         self.rate_follicle_stimulating_hormone(record.fsh)
+        self.rate_thyroid_stimulating_hormone(record.tsh)
+        self.rate_estrogen(record.estrogen)
         return render(request, 'finish.html', vars(self))
 
     def rate_body_mass_index(self, height, weight):
@@ -64,6 +66,7 @@ class ResultView(View):
         return result
 
     def rate_anti_muellerian_hormone(self, amh):
+
         if 0 <= amh <= 30:
             if amh <= 0.1:
                 result = 1.5
@@ -116,6 +119,23 @@ class ResultView(View):
         if settings.DEBUG:
             self.debug_tsh = tsh
             self.debug_tsh_rating = result
+
+        return result
+
+    def rate_estrogen(self, estrogen):
+
+        if 0 <= estrogen <= 500:
+            if estrogen <= 15:
+                result = 1.5
+            elif 15 < estrogen <= 65:
+                result = 1
+            elif estrogen > 65:
+                result = 1.5
+                #TODO add diagnostic warning estrogen too high
+
+        if settings.DEBUG:
+            self.debug_estrogen = estrogen
+            self.debug_estrogen_rating = result
 
         return result
 

@@ -25,7 +25,7 @@ class TSHForm(forms.Form):
 
 
 class OestrogenForm(forms.Form):
-    oestrogen = forms.IntegerField()
+    oestrogen = forms.IntegerField(min_value=0, max_value=500)
 
 
 class RegularityOfTheMenstrualCycleForm(forms.Form):
