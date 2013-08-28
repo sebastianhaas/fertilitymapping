@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.views.generic.base import View
 from django.conf import settings
 from FertCalculator.models import *
+from FertCalculator.utils import *
 from decimal import *
 import os
 import binascii
@@ -40,13 +41,30 @@ class FertilityWizard(SessionWizardView):
 class ResultView(View):
     def get(self, request):
         record = Record.objects.get(id=self.request.session['result_id'])
-        self.biological_age = 99.9
-        self.rate_body_mass_index(record.patient.height, record.weight)
-        self.rate_anti_muellerian_hormone(record.amh)
-        self.rate_follicle_stimulating_hormone(record.fsh)
-        self.rate_thyroid_stimulating_hormone(record.tsh)
-        self.rate_estrogen(record.estrogen)
+        self.biological_age = self.map_biological_age(record)
         return render(request, 'finish.html', vars(self))
+
+    def map_biological_age(self, record):
+        bmi_rating = self.rate_body_mass_index(record.patient.height, record.weight)
+        amh_rating = self.rate_anti_muellerian_hormone(record.amh)
+        fsh_rating = self.rate_follicle_stimulating_hormone(record.fsh)
+        tsh_rating = self.rate_thyroid_stimulating_hormone(record.tsh)
+        estrogen_rating = self.rate_estrogen(record.estrogen)
+
+        bmi_weighting = 1.0
+        amh_weighting = 9.2
+        fsh_weighting = 3.0
+        tsh_weighting = 3.0
+        estrogen_weighting = 1.0
+
+        factor = ((bmi_rating * bmi_weighting) + \
+                 (amh_rating * amh_weighting) + \
+                 (fsh_rating * fsh_weighting) + \
+                 (tsh_rating * tsh_weighting) + \
+                 (estrogen_rating * estrogen_weighting)) / \
+                 (bmi_weighting + amh_weighting + fsh_weighting + tsh_weighting + estrogen_weighting)
+
+        return factor * calculate_age(record.patient.birthday)
 
     def rate_body_mass_index(self, height, weight):
         bmi = weight / ((height / Decimal(100.0)) * (height / Decimal(100.0)))
