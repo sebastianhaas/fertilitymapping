@@ -46,6 +46,7 @@ class ResultView(View):
         self.rate_follicle_stimulating_hormone(record.fsh)
         self.rate_thyroid_stimulating_hormone(record.tsh)
         self.rate_estrogen(record.estrogen)
+        self.rate_menstrual_cycle(record.menstrual_cycle)
         return render(request, 'finish.html', vars(self))
 
     def rate_body_mass_index(self, height, weight):
@@ -136,6 +137,19 @@ class ResultView(View):
         if settings.DEBUG:
             self.debug_estrogen = estrogen
             self.debug_estrogen_rating = result
+
+        return result
+
+    def rate_menstrual_cycle(self, cycle):
+
+        if 100 >= cycle >= 0:
+            result = 1
+        else:
+            result = 1.1
+
+        if settings.DEBUG:
+            self.debug_menstrual_cycle = cycle
+            self.debug_menstrual_cycle_rating = result
 
         return result
 
