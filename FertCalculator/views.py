@@ -37,6 +37,23 @@ class FertilityWizard(SessionWizardView):
         self.request.session['result_id'] = record.id
         return HttpResponseRedirect('/result/')
 
+    # def get_form(self, step=None, data=None, files=None):
+    #     form = super(FertilityWizard, self).get_form(step, data, files)
+    #
+    #     # determine the step if not given
+    #     if step is None:
+    #         step = self.steps.current
+    #
+    #     if step == '1':
+    #         bla = self.get_cleaned_data_for_step('0')
+    #
+    #     return form
+
+    def get_form_kwargs(self, step=None):
+        if step == '1':
+            return {'extra': 10}
+        return {}
+
 
 class ResultView(View):
     def get(self, request):

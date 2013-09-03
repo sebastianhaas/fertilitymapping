@@ -33,6 +33,27 @@ class RegularityOfTheMenstrualCycleForm(forms.Form):
     deviance = forms.IntegerField(min_value=0, max_value=100)
 
 
+class PregnancyCountForm(forms.Form):
+    children = forms.IntegerField(min_value=0, max_value=10)
+    pregnancies = forms.IntegerField(min_value=0, max_value=50)
+
+    # def clean(self):
+    #     cleaned_data = super(PregnancyCountForm, self).clean()
+    #     children = cleaned_data.get("children")
+    #     pregnancies = cleaned_data.get("pregnancies")
+    #
+    #     if children is not None and pregnancies is not None and children > 0 >= pregnancies:
+    #         msg = u"You can't have children without being pregnant."
+    #         self._errors["children"] = self.error_class([msg])
+    #
+    #         # These fields are no longer valid. Remove them from the cleaned data.
+    #         del cleaned_data["children"]
+    #         del cleaned_data["pregnancies"]
+    #
+    #     # Always return the full collection of cleaned data.
+    #     return cleaned_data
+
+
 class PregnancyForm(forms.ModelForm):
     class Meta:
         model = Pregnancy
