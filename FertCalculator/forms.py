@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from django import forms
+from FertCalculator.models import Pregnancy
 
 
 class NewUserForm(forms.Form):
@@ -30,3 +31,9 @@ class OestrogenForm(forms.Form):
 
 class RegularityOfTheMenstrualCycleForm(forms.Form):
     deviance = forms.IntegerField(min_value=0, max_value=100)
+
+
+class PregnancyForm(forms.ModelForm):
+    class Meta:
+        model = Pregnancy
+        fields = ['outcome']

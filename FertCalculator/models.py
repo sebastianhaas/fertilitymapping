@@ -11,13 +11,16 @@ class Patient(models.Model):
 
 
 class PregnancyOutcome(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
+
+    def __unicode__(self):
+        return u'%s' % self.name
 
 
 class Record(models.Model):
     patient = models.ForeignKey(Patient)
     datetime = models.DateTimeField(auto_now=True)
-    weight = models.DecimalField(max_digits=3, decimal_places=1)  # kg
+    weight = models.DecimalField(max_digits=4, decimal_places=1)  # kg
     amh = models.PositiveSmallIntegerField()  # nanogram per millilitre, ng/mL
     fsh = models.DecimalField(max_digits=5, decimal_places=2)  # international units per litre, IU/L
     tsh = models.DecimalField(max_digits=3, decimal_places=1)  # micro-international units per millilitre

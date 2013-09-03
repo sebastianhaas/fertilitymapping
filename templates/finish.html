@@ -5,7 +5,7 @@
     <title>{% trans "Fertility Mapping" %}</title>
 </head>
 <body>
-{% blocktrans %}Your biological age is {{ biological_age|floatformat:2 }} years.{% endblocktrans %}
+{% blocktrans with biological_age|floatformat:2 as age_result %}Your biological age is {{ age_result }} years.{% endblocktrans %}
 
 {% if debug %}
     <br/><br/>
@@ -34,6 +34,11 @@
             <td>{% trans "Estrogen" %}</td>
             <td>{{ debug_estrogen|floatformat:2 }}</td>
             <td>{{ debug_estrogen_rating }}</td>
+        </tr>
+        <tr>
+            <td>{% trans "Menstrual Cycle" %}</td>
+            <td>{{ debug_menstrual_cycle|floatformat:2 }}</td>
+            <td>{{ debug_menstrual_cycle_rating }}</td>
         </tr>
     </table>
 {% endif %}

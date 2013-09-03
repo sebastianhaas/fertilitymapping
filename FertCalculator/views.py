@@ -52,18 +52,21 @@ class ResultView(View):
         estrogen_rating = self.rate_estrogen(record.estrogen)
         menstrual_rating = self.rate_menstrual_cycle(record.menstrual_cycle)
 
+        #TODO Get these values from a configuration table in the database
         bmi_weighting = 1.0
         amh_weighting = 9.2
         fsh_weighting = 3.0
         tsh_weighting = 3.0
         estrogen_weighting = 1.0
+        menstrual_weighting = 1.0
 
-        factor = ((bmi_rating * bmi_weighting) + \
-                 (amh_rating * amh_weighting) + \
-                 (fsh_rating * fsh_weighting) + \
-                 (tsh_rating * tsh_weighting) + \
-                 (estrogen_rating * estrogen_weighting)) / \
-                 (bmi_weighting + amh_weighting + fsh_weighting + tsh_weighting + estrogen_weighting)
+        factor = (((bmi_rating * bmi_weighting) +
+                   (amh_rating * amh_weighting) +
+                   (fsh_rating * fsh_weighting) +
+                   (tsh_rating * tsh_weighting) +
+                   (estrogen_rating * estrogen_weighting) /
+                   (menstrual_rating * menstrual_weighting)) /
+                  (bmi_weighting + amh_weighting + fsh_weighting + tsh_weighting + estrogen_weighting))
 
         return factor * calculate_age(record.patient.birthday)
 

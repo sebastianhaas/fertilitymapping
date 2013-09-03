@@ -2,6 +2,7 @@
 
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.forms.formsets import formset_factory
 from FertCalculator import views, forms
 
 admin.autodiscover()
@@ -14,16 +15,19 @@ urlpatterns = patterns('',
                        url(r'^admin/', admin.site.urls),
 
                        # The actual wizard
-                       url(r'^calculator/$', views.FertilityWizard.as_view([forms.NewUserForm,
-                                                                            forms.BMIForm,
-                                                                            forms.AMHForm,
-                                                                            forms.FSHForm,
-                                                                            forms.TSHForm,
-                                                                            forms.OestrogenForm,
-                                                                            forms.RegularityOfTheMenstrualCycleForm])),
+                       url(r'^calculator/$',
+                           views.FertilityWizard.as_view([formset_factory(forms.PregnancyForm, extra=1, max_num=10, can_order=True),
+                                                          forms.NewUserForm,
+                                                          forms.BMIForm,
+                                                          forms.AMHForm,
+                                                          forms.FSHForm,
+                                                          forms.TSHForm,
+                                                          forms.OestrogenForm,
+                                                          forms.RegularityOfTheMenstrualCycleForm
+                           ])),
 
                        # The result view
                        url(r'^result/', views.ResultView.as_view()),
-                       )
+)
 
 
