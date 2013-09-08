@@ -1,0 +1,49 @@
+/* import "Vollkorn" font from google fonts */
+@import url(http://fonts.googleapis.com/css?family=Vollkorn);
+
+body {
+    background-image: -moz-linear-gradient(top, rgba(241, 241, 241, 1) 0%, rgba(255, 255, 255, 0) 100%); /* FF3.6+ */
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(241, 241, 241, 1)), color-stop(100%, rgba(255, 255, 255, 0))); /* Chrome,Safari4+ */
+    background-image: -webkit-linear-gradient(top, rgba(241, 241, 241, 1) 0%, rgba(255, 255, 255, 0) 100%); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top, rgba(241, 241, 241, 1) 0%, rgba(255, 255, 255, 0) 100%); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top, rgba(241, 241, 241, 1) 0%, rgba(255, 255, 255, 0) 100%); /* IE10+ */
+    background-image: linear-gradient(to bottom, rgba(241, 241, 241, 1) 0%, rgba(255, 255, 255, 0) 100%); /* W3C */
+    background-repeat: no-repeat;
+    font-family: 'Vollkorn', serif;
+    height: 100%;
+    width: 100%;
+}
+
+.content_bg_top {
+    background: url('wko_design_02.png') no-repeat left top;
+    width: 1024px;
+    height: 80px;
+}
+
+.content_bg_mid_container {
+    width: 100%;
+}
+
+.content_bg_mid_left {
+    background: url('wko_design_03.png') no-repeat;
+    float: left;
+    vertical-align: top;
+    width: 123px;
+    height: 330px;
+}
+
+.content_bg_mid_center {
+    background: url('wko_design_04.png') no-repeat;
+    float: left;
+    vertical-align: top;
+    width: 778px;
+    height: 330px;
+}
+
+.content_bg_mid_right {
+    background: url('wko_design_05.png') no-repeat;
+    float: left;
+    vertical-align: top;
+    width: 123px;
+    height: 330px;
+}

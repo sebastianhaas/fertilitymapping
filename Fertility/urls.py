@@ -29,6 +29,6 @@ urlpatterns = patterns('',
 
                        # The result view
                        url(r'^result/', views.ResultView.as_view()),
-)
+                       )
 
 
