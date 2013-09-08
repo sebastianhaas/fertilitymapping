@@ -8,14 +8,11 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-<div>
-    <div class="content_bg_top"></div>
-    <div class="content_bg_mid_container">
-        <div class="content_bg_mid_left"></div>
-        <div class="content_bg_mid_center">{% block content %}{% endblock %}</div>
-        <div class="content_bg_mid_right"></div>
+<div class="content_box">
+    <div class="content">
+        <h2>{% block sectiontitle %}{% endblock %}</h2>
+        {% block content %}{% endblock %}
     </div>
 </div>
-
 </body>
 </html>

@@ -7,6 +7,8 @@
     <title>{% trans "Fertility Mapping" %}</title>
 </head>
 <body>
+{% block sectiontitle %}Ergebnis{% endblock %}
+{% block content %}Das ist ein Test für den Block.{% endblock %}
 {% blocktrans with biological_age|floatformat:2 as age_result %}Your biological age is {{ age_result }} years.{% endblocktrans %}
 
 {% if debug %}
