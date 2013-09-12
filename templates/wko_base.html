@@ -6,9 +6,7 @@
 <head>
     <link rel="stylesheet" href="{% static "wko_design.css" %}"/>
     <title>{% block title %}{% endblock %}</title>
-
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -102,6 +100,8 @@
 
 <body>
 <div class="content_box">
+    <img src="{% static "wko_logo.png" %}" class="logo">
+
     <div class="content">
         <h2>{% block sectiontitle %}{% endblock %}</h2>
         {% block content %}{% endblock %}

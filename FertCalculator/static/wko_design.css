@@ -1,5 +1,5 @@
 /* import "Vollkorn" font from google fonts */
-@import url(http://fonts.googleapis.com/css?family=Vollkorn);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic);
 
 body {
     background: -moz-linear-gradient(top, rgba(241, 241, 241, 1) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%); /* FF3.6+ */
@@ -10,7 +10,7 @@ body {
     background: linear-gradient(to bottom, rgba(241, 241, 241, 1) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f1f1f1', endColorstr='#00ffffff', GradientType=0); /* IE6-9 */
     background-repeat: no-repeat;
-    font-family: 'Vollkorn', serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .content_box {
@@ -25,4 +25,11 @@ body {
 
 .content {
     padding: 50px;
+}
+
+.logo {
+    float: right;
+    position: relative;
+    top: 50px;
+    right: 50px;
 }

@@ -17,7 +17,13 @@ class FertilityWizard(SessionWizardView):
     def done(self, form_list, **kwargs):
         form_dict = {}
         for form in form_list:
-            form_dict = dict(form_dict.items() + form.cleaned_data.items())
+            if isinstance(form.cleaned_data, dict):
+                form_dict = dict(form_dict.items() + form.cleaned_data.items())
+            elif isinstance(form.cleaned_data, list):
+                for i, outcome_form in enumerate(form.cleaned_data):
+                    form_dict['pregnancy_outcome_' + str(i)] = outcome_form['outcome']
+            else:
+                raise ValueError("Element in cleaned_data not of type list or dict.")
 
         patient = Patient()
         patient.birthday = form_dict['birthday']
@@ -44,26 +50,26 @@ class FertilityWizard(SessionWizardView):
         else:
             return "default.html"
 
-        # def process_step(self, form):
-        #     self.test_pregnancies = form.cleaned_data['pregnancies']
-        #     return self.get_form_step_data(form)
-        #
-        # def get_form(self, step=None, data=None, files=None):
-        #     # determine the step if not given
-        #     if step is None:
-        #         step = self.steps.current
-        #
-        #     if step == '1':
-        #         form = formset_factory(PregnancyForm, extra=self.test_pregnancies, max_num=10)
-        #     else:
-        #         form = super(FertilityWizard, self).get_form(step, data, files)
-        #
-        #     return form
-        #
-        # def get_form_kwargs(self, step=None):
-        #     if step == '1':
-        #         return {'extra': 10}
-        #     return {}
+            # def process_step(self, form):
+            #     self.test_pregnancies = form.cleaned_data['pregnancies']
+            #     return self.get_form_step_data(form)
+            #
+            # def get_form(self, step=None, data=None, files=None):
+            #     # determine the step if not given
+            #     if step is None:
+            #         step = self.steps.current
+            #
+            #     if step == '1':
+            #         form = formset_factory(PregnancyForm, extra=self.test_pregnancies, max_num=10)
+            #     else:
+            #         form = super(FertilityWizard, self).get_form(step, data, files)
+            #
+            #     return form
+            #
+            # def get_form_kwargs(self, step=None):
+            #     if step == '1':
+            #         return {'extra': 10}
+            #     return {}
 
 
 class ResultView(View):
