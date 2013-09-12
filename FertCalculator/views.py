@@ -39,7 +39,7 @@ class FertilityWizard(SessionWizardView):
         return HttpResponseRedirect('/result/')
 
     def get_template_names(self):
-        if self.steps.current == u'1':
+        if self.steps.current == u'3':
             return "pregnancies.html"
         else:
             return "default.html"
