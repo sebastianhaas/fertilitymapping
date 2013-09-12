@@ -1,0 +1,4 @@
+Dynamically adding a new form to a formset:
+
+    Mainly:             https://github.com/rotaris/Dynamic-Form-Todo-Add-in-Django
+    For reference:      https://code.google.com/p/django-dynamic-formset/source/browse/trunk/demo/example/views.py

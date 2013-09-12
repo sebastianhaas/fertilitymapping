@@ -17,7 +17,8 @@ urlpatterns = patterns('',
                        # The actual wizard
                        url(r'^calculator/$',
                            views.FertilityWizard.as_view([forms.PregnancyCountForm,
-                                                          formset_factory(forms.PregnancyForm, extra=1, max_num=10),
+                                                          formset_factory(forms.PregnancyForm, max_num=10,
+                                                                          formset=views.RequiredFormSet),
                                                           forms.NewUserForm,
                                                           forms.BMIForm,
                                                           forms.AMHForm,
@@ -29,6 +30,6 @@ urlpatterns = patterns('',
 
                        # The result view
                        url(r'^result/', views.ResultView.as_view()),
-                       )
+)
 
 

@@ -8,17 +8,18 @@
 {% block content %}
     <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
     <form action="" method="post">{% csrf_token %}
-        <table>
-            {{ wizard.management_form }}
-            {% if wizard.form.forms %}
-                {{ wizard.form.management_form }}
-                {% for form in wizard.form.forms %}
-                    {{ form }}
-                {% endfor %}
-            {% else %}
-                {{ wizard.form }}
-            {% endif %}
-        </table>
+        {{ wizard.management_form }}
+        {% if wizard.form.forms %}
+            {{ wizard.form.management_form }}
+            {% for form in wizard.form.forms %}
+                <div class="item">
+                    {{ form.as_p }}
+                    <p style=""><a class="delete" href="#">Delete</a></p>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <p><a id="add" href="#">Add another item</a></p>
         {% if wizard.steps.prev %}
             <button name="wizard_goto_step" type="submit"
                     value="{{ wizard.steps.first }}">{% trans "first step" %}</button>

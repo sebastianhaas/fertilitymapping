@@ -5,6 +5,7 @@ from django.contrib.formtools.wizard.views import SessionWizardView
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.conf import settings
+from django.forms.formsets import BaseFormSet
 from FertCalculator.models import *
 from FertCalculator.utils import *
 from decimal import *
@@ -37,22 +38,32 @@ class FertilityWizard(SessionWizardView):
         self.request.session['result_id'] = record.id
         return HttpResponseRedirect('/result/')
 
-    # def get_form(self, step=None, data=None, files=None):
-    #     form = super(FertilityWizard, self).get_form(step, data, files)
-    #
-    #     # determine the step if not given
-    #     if step is None:
-    #         step = self.steps.current
-    #
-    #     if step == '1':
-    #         bla = self.get_cleaned_data_for_step('0')
-    #
-    #     return form
+    def get_template_names(self):
+        if self.steps.current == u'1':
+            return "pregnancies.html"
+        else:
+            return "default.html"
 
-    def get_form_kwargs(self, step=None):
-        if step == '1':
-            return {'extra': 10}
-        return {}
+        # def process_step(self, form):
+        #     self.test_pregnancies = form.cleaned_data['pregnancies']
+        #     return self.get_form_step_data(form)
+        #
+        # def get_form(self, step=None, data=None, files=None):
+        #     # determine the step if not given
+        #     if step is None:
+        #         step = self.steps.current
+        #
+        #     if step == '1':
+        #         form = formset_factory(PregnancyForm, extra=self.test_pregnancies, max_num=10)
+        #     else:
+        #         form = super(FertilityWizard, self).get_form(step, data, files)
+        #
+        #     return form
+        #
+        # def get_form_kwargs(self, step=None):
+        #     if step == '1':
+        #         return {'extra': 10}
+        #     return {}
 
 
 class ResultView(View):
@@ -191,3 +202,11 @@ class ResultView(View):
 
         return result
 
+
+# This class is used to make empty formset forms required
+# See http://stackoverflow.com/questions/2406537/django-formsets-make-first-required/4951032#4951032
+class RequiredFormSet(BaseFormSet):
+    def __init__(self, *args, **kwargs):
+        super(RequiredFormSet, self).__init__(*args, **kwargs)
+        for form in self.forms:
+            form.empty_permitted = False
