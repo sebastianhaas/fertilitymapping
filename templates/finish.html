@@ -1,50 +1,56 @@
-{%  extends "wko_base.html" %}
+{% extends "wko_base.html" %}
 {% load i18n %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{% trans "Fertility Mapping" %}</title>
-</head>
-<body>
 {% block sectiontitle %}Ergebnis{% endblock %}
-{% block content %}Das ist ein Test für den Block.{% endblock %}
-{% blocktrans with biological_age|floatformat:2 as age_result %}Your biological age is {{ age_result }} years.{% endblocktrans %}
+{% block content %}
+    {% blocktrans with biological_age|floatformat:2 as age_result %}Your biological age is {{ age_result }} years.
+    {% endblocktrans %}
 
-{% if debug %}
-    <br/><br/>
-    <table border="0">
-        <tr>
-            <td>{% trans "BMI" %}</td>
-            <td>{{ debug_bmi|floatformat:2 }}</td>
-            <td>{{ debug_bmi_rating }}</td>
-        </tr>
-        <tr>
-            <td>{% trans "AMH" %}</td>
-            <td>{{ debug_amh|floatformat:2 }}</td>
-            <td>{{ debug_amh_rating }}</td>
-        </tr>
-        <tr>
-            <td>{% trans "FSH" %}</td>
-            <td>{{ debug_fsh|floatformat:2 }}</td>
-            <td>{{ debug_fsh_rating }}</td>
-        </tr>
-        <tr>
-            <td>{% trans "TSH" %}</td>
-            <td>{{ debug_tsh|floatformat:2 }}</td>
-            <td>{{ debug_tsh_rating }}</td>
-        </tr>
-        <tr>
-            <td>{% trans "Estrogen" %}</td>
-            <td>{{ debug_estrogen|floatformat:2 }}</td>
-            <td>{{ debug_estrogen_rating }}</td>
-        </tr>
-        <tr>
-            <td>{% trans "Menstrual Cycle" %}</td>
-            <td>{{ debug_menstrual_cycle|floatformat:2 }}</td>
-            <td>{{ debug_menstrual_cycle_rating }}</td>
-        </tr>
-    </table>
-{% endif %}
-</body>
-</html>
+    {% if debug %}
+        <br/><br/>
+        <table border="0">
+            <tr>
+                <td>{% trans "Date of birth" %}</td>
+                <td>{{ debug_vars.date_of_birth }}</td>
+            </tr>
+            <tr>
+                <td>{% trans "Height" %}</td>
+                <td>{{ debug_vars.height }}</td>
+            </tr>
+            <tr>
+                <td>{% trans "Weight" %}</td>
+                <td>{{ debug_vars.weight }}</td>
+            </tr>
+            <tr>
+                <td>{% trans "BMI" %}</td>
+                <td>{{ debug_vars.bmi|floatformat:2 }}</td>
+                <td>{{ debug_rating.bmi }}</td>
+            </tr>
+            <tr>
+                <td>{% trans "AMH" %}</td>
+                <td>{{ debug_vars.amh|floatformat:2 }}</td>
+                <td>{{ debug_rating.amh }}</td>
+            </tr>
+            <tr>
+                <td>{% trans "FSH" %}</td>
+                <td>{{ debug_vars.fsh|floatformat:2 }}</td>
+                <td>{{ debug_rating.fsh }}</td>
+            </tr>
+            <tr>
+                <td>{% trans "TSH" %}</td>
+                <td>{{ debug_vars.tsh|floatformat:2 }}</td>
+                <td>{{ debug_rating.tsh }}</td>
+            </tr>
+            <tr>
+                <td>{% trans "Estrogen" %}</td>
+                <td>{{ debug_vars.estrogen|floatformat:2 }}</td>
+                <td>{{ debug_rating.estrogen }}</td>
+            </tr>
+            <tr>
+                <td>{% trans "Menstrual Cycle" %}</td>
+                <td>{{ debug_vars.menstrual_cycle|floatformat:2 }}</td>
+                <td>{{ debug_rating.menstrual_cycle }}</td>
+            </tr>
+        </table>
+    {% endif %}
+{% endblock %}

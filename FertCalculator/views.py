@@ -20,8 +20,9 @@ class FertilityWizard(SessionWizardView):
             if isinstance(form.cleaned_data, dict):
                 form_dict = dict(form_dict.items() + form.cleaned_data.items())
             elif isinstance(form.cleaned_data, list):
+                form_dict['pregnancy_outcome'] = {}
                 for i, outcome_form in enumerate(form.cleaned_data):
-                    form_dict['pregnancy_outcome_' + str(i)] = outcome_form['outcome']
+                    form_dict['pregnancy_outcome']['outcome_' + str(i)] = outcome_form['outcome']
             else:
                 raise ValueError("Element in cleaned_data not of type list or dict.")
 
@@ -75,7 +76,16 @@ class FertilityWizard(SessionWizardView):
 class ResultView(View):
     def get(self, request):
         record = Record.objects.get(id=self.request.session['result_id'])
+
+        if settings.DEBUG:
+            self.debug_vars = {}
+            self.debug_ratings = {}
+            self.debug_vars['date_of_birth'] = record.patient.birthday
+            self.debug_vars['height'] = record.patient.height
+            self.debug_vars['weight'] = record.weight
+
         self.biological_age = self.map_biological_age(record)
+
         return render(request, 'finish.html', vars(self))
 
     def map_biological_age(self, record):
@@ -116,8 +126,8 @@ class ResultView(View):
                 result = 1.2
 
         if settings.DEBUG:
-            self.debug_bmi = bmi
-            self.debug_bmi_rating = result
+            self.debug_vars['bmi'] = bmi
+            self.debug_ratings['bmi'] = result
 
         return result
 
@@ -137,8 +147,8 @@ class ResultView(View):
                 #TODO add diagnostic warning amh too high
 
         if settings.DEBUG:
-            self.debug_amh = amh
-            self.debug_amh_rating = result
+            self.debug_vars['amh'] = amh
+            self.debug_ratings['amh'] = result
 
         return result
 
@@ -150,8 +160,8 @@ class ResultView(View):
             result = 1.1
 
         if settings.DEBUG:
-            self.debug_fsh = fsh
-            self.debug_fsh_rating = result
+            self.debug_vars['fsh'] = fsh
+            self.debug_ratings['fsh'] = result
 
         return result
 
@@ -173,8 +183,8 @@ class ResultView(View):
                 result = 1.6
 
         if settings.DEBUG:
-            self.debug_tsh = tsh
-            self.debug_tsh_rating = result
+            self.debug_vars['tsh'] = tsh
+            self.debug_ratings['tsh'] = result
 
         return result
 
@@ -190,8 +200,8 @@ class ResultView(View):
                 #TODO add diagnostic warning estrogen too high
 
         if settings.DEBUG:
-            self.debug_estrogen = estrogen
-            self.debug_estrogen_rating = result
+            self.debug_vars['estrogen'] = estrogen
+            self.debug_ratings['estrogen'] = result
 
         return result
 
@@ -203,8 +213,8 @@ class ResultView(View):
             result = 1.1
 
         if settings.DEBUG:
-            self.debug_menstrual_cycle = cycle
-            self.debug_menstrual_cycle_rating = result
+            self.debug_vars['menstrual_cycle'] = cycle
+            self.debug_ratings['menstrual_cycle'] = result
 
         return result
 
