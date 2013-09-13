@@ -18,6 +18,20 @@ class PregnancyOutcome(models.Model):
 
 
 class Record(models.Model):
+    DEFAULT = 'DEF'
+    MORE_THAN_TWO_TIMES_A_WEEK = '>2W'
+    TWO_TIMES_A_WEEK = '2W'
+    ONCE_A_WEEK = '1W'
+    ONCE_A_MONTH = '1M'
+    NO_INTERCOURSE = 'NO'
+    REGULARITY_OF_INTERCOURSE_CHOICES = (
+        (MORE_THAN_TWO_TIMES_A_WEEK, 'More than two times a week'),
+        (TWO_TIMES_A_WEEK, 'Two times a week'),
+        (ONCE_A_WEEK, 'Once a week'),
+        (ONCE_A_MONTH, 'Once a month'),
+        (NO_INTERCOURSE, 'No sexual intercourse')
+    )
+
     patient = models.ForeignKey(Patient)
     datetime = models.DateTimeField(auto_now=True)
     weight = models.DecimalField(max_digits=4, decimal_places=1)  # kg
@@ -25,7 +39,9 @@ class Record(models.Model):
     fsh = models.DecimalField(max_digits=5, decimal_places=2)  # international units per litre, IU/L
     tsh = models.DecimalField(max_digits=3, decimal_places=1)  # micro-international units per millilitre
     estrogen = models.SmallIntegerField()  # pg/mL
-    menstrual_cycle = models.PositiveSmallIntegerField()  # length of the menstrual cycle in days
+    menstrual_cycle = models.PositiveSmallIntegerField()  # deviance in days
+    regularity_of_intercourse = models.CharField(max_length=3, choices=REGULARITY_OF_INTERCOURSE_CHOICES,
+                                                 default=DEFAULT)
 
 
 class Pregnancy(models.Model):

@@ -1,7 +1,8 @@
 # coding=utf-8
 
 from django import forms
-from FertCalculator.models import Pregnancy
+from django.forms import RadioSelect
+from FertCalculator.models import Pregnancy, Record
 
 
 class NewUserForm(forms.Form):
@@ -33,24 +34,15 @@ class RegularityOfTheMenstrualCycleForm(forms.Form):
     deviance = forms.IntegerField(min_value=0, max_value=100)
 
 
-class PregnancyCountForm(forms.Form):
-    children = forms.IntegerField(min_value=0, max_value=10)
-    pregnancies = forms.IntegerField(min_value=0, max_value=50)
-
-    def clean(self):
-        cleaned_data = super(PregnancyCountForm, self).clean()
-        children = cleaned_data.get("children")
-        pregnancies = cleaned_data.get("pregnancies")
-
-        if children is not None and pregnancies is not None:
-            if children > 0 >= pregnancies:
-                raise forms.ValidationError(u"You can't have children without being pregnant.")
-            if pregnancies * 4 < children:
-                raise forms.ValidationError(u"Please correct your input.")
-        return cleaned_data
+class PrecedingPregnancyForm(forms.Form):
+    pregnancies = forms.BooleanField(required=False)
 
 
-class PregnancyForm(forms.ModelForm):
+class RegularityOfIntercourse(forms.Form):
+    regularity = forms.ChoiceField(widget=RadioSelect, choices=Record.REGULARITY_OF_INTERCOURSE_CHOICES)
+
+
+class PregnancyOutcomeForm(forms.ModelForm):
     class Meta:
         model = Pregnancy
         fields = ['outcome']

@@ -55,26 +55,15 @@ class FertilityWizard(SessionWizardView):
         else:
             return "default.html"
 
-            # def process_step(self, form):
-            #     self.test_pregnancies = form.cleaned_data['pregnancies']
-            #     return self.get_form_step_data(form)
-            #
-            # def get_form(self, step=None, data=None, files=None):
-            #     # determine the step if not given
-            #     if step is None:
-            #         step = self.steps.current
-            #
-            #     if step == '1':
-            #         form = formset_factory(PregnancyForm, extra=self.test_pregnancies, max_num=10)
-            #     else:
-            #         form = super(FertilityWizard, self).get_form(step, data, files)
-            #
-            #     return form
-            #
-            # def get_form_kwargs(self, step=None):
-            #     if step == '1':
-            #         return {'extra': 10}
-            #     return {}
+
+def show_sex_form_condition(wizard):
+    cleaned_data = wizard.get_cleaned_data_for_step('2') or {}
+    return not cleaned_data.get('pregnancies', False)
+
+
+def show_pregnancy_outcome_condition(wizard):
+    cleaned_data = wizard.get_cleaned_data_for_step('2') or {}
+    return cleaned_data.get('pregnancies', True)
 
 
 class ResultView(View):
