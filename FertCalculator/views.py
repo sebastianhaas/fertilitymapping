@@ -15,12 +15,11 @@ import binascii
 
 class FertilityWizard(SessionWizardView):
     def done(self, form_list, **kwargs):
-        form_dict = {}
+        form_dict = {'pregnancy_outcome': {}}
         for form in form_list:
             if isinstance(form.cleaned_data, dict):
                 form_dict = dict(form_dict.items() + form.cleaned_data.items())
             elif isinstance(form.cleaned_data, list):
-                form_dict['pregnancy_outcome'] = {}
                 for i, outcome_form in enumerate(form.cleaned_data):
                     form_dict['pregnancy_outcome']['outcome_' + str(i)] = outcome_form['outcome']
             else:
@@ -40,6 +39,7 @@ class FertilityWizard(SessionWizardView):
         record.tsh = form_dict['tsh']
         record.estrogen = form_dict['oestrogen']
         record.menstrual_cycle = form_dict['deviance']
+        record.regularity_of_intercourse = form_dict['regularity']
         record.save()
 
         # add pregnancy outcomes
@@ -56,9 +56,9 @@ class FertilityWizard(SessionWizardView):
             return "default.html"
 
 
-def show_sex_form_condition(wizard):
-    cleaned_data = wizard.get_cleaned_data_for_step('2') or {}
-    return not cleaned_data.get('pregnancies', False)
+# def show_sex_form_condition(wizard):
+#     cleaned_data = wizard.get_cleaned_data_for_step('2') or {}
+#     return not cleaned_data.get('pregnancies', False)
 
 
 def show_pregnancy_outcome_condition(wizard):
@@ -89,6 +89,7 @@ class ResultView(View):
         estrogen_rating = self.rate_estrogen(record.estrogen)
         menstrual_rating = self.rate_menstrual_cycle(record.menstrual_cycle)
         pregnancy_rating = self.rate_pregnancy_outcomes(record.pregnancy_set.all())
+        regularity_rating = self.rate_regularity_of_intercourse(record.regularity_of_intercourse)
 
         #TODO Get these values from a configuration table in the database
         bmi_weighting = 1.0
@@ -98,6 +99,7 @@ class ResultView(View):
         estrogen_weighting = 1.0
         menstrual_weighting = 1.0
         pregnancy_weighting = 1.0
+        regularity_weighting = 1.0
 
         factor = (((bmi_rating * bmi_weighting) +
                    (amh_rating * amh_weighting) +
@@ -105,9 +107,10 @@ class ResultView(View):
                    (tsh_rating * tsh_weighting) +
                    (estrogen_rating * estrogen_weighting) /
                    (menstrual_rating * menstrual_weighting) /
-                   (pregnancy_rating * pregnancy_weighting)) /
+                   (pregnancy_rating * pregnancy_weighting) /
+                   (regularity_rating * regularity_weighting)) /
                   (bmi_weighting + amh_weighting + fsh_weighting + tsh_weighting +
-                   estrogen_weighting + menstrual_weighting + pregnancy_weighting))
+                   estrogen_weighting + menstrual_weighting + pregnancy_weighting + regularity_weighting))
 
         return factor * calculate_age(record.patient.birthday)
 
@@ -216,14 +219,33 @@ class ResultView(View):
         return result
 
     def rate_pregnancy_outcomes(self, pregnancy_outcomes):
+        rating = Decimal(0.000)
         for pregnancy in pregnancy_outcomes:
-            pregnancy.outcome
+            try:
+                rating += RatingPregnancyOutcome.objects.get(outcome=pregnancy.outcome).rating
+            except RatingPregnancyOutcome.DoesNotExist:
+                print('No rating found for %s', pregnancy.outcome)
+
+        rating += 1
 
         if settings.DEBUG:
             self.debug_vars['pregnancy_outcome'] = pregnancy_outcomes
-            self.debug_ratings['pregnancy_outcome'] = 1
+            self.debug_ratings['pregnancy_outcome'] = rating
 
-        return 1
+        return float(rating)
+
+    def rate_regularity_of_intercourse(self, regularity):
+        ratings_map = {Record.MORE_THAN_TWO_TIMES_A_WEEK: 1,
+                       Record.TWO_TIMES_A_WEEK: 1.01,
+                       Record.ONCE_A_WEEK: 1.1,
+                       Record.ONCE_A_MONTH: 1.2}
+        rating = ratings_map.get(regularity, 1)
+
+        if settings.DEBUG:
+            self.debug_vars['regularity_of_intercourse'] = regularity
+            self.debug_ratings['regularity_of_intercourse'] = rating
+
+        return rating
 
 
 # This class is used to make empty formset forms required

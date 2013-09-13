@@ -28,8 +28,7 @@ urlpatterns = patterns('',
                                                           forms.OestrogenForm,
                                                           forms.RegularityOfTheMenstrualCycleForm
                                                          ],
-                                                         condition_dict={'3': views.show_pregnancy_outcome_condition,
-                                                                         '4': views.show_sex_form_condition})),
+                                                         condition_dict={'3': views.show_pregnancy_outcome_condition})),
 
                        # The result view
                        url(r'^result/', views.ResultView.as_view()),
