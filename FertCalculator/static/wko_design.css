@@ -18,7 +18,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 1024px;
-    height: 500px;
+    min-height: 500px;
     background: white;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
 }
