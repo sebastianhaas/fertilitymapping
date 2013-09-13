@@ -1,5 +1,6 @@
 {% extends "wko_base.html" %}
 {% load i18n %}
+{% load static %}
 
 {% block head %}
     {{ wizard.form.media }}
@@ -13,10 +14,15 @@
         {% if wizard.form.forms %}
             {{ wizard.form.management_form }}
             {% for form in wizard.form.forms %}
-                <div class="item">
-                    {{ form.as_p }}
-                    <p style=""><a class="delete" href="#">Delete</a></p>
-                </div>
+                {% for field in form %}
+                    <div class="item">
+                        {{ field.errors }}
+                        {{ field.label_tag }}: {{ field }}<a class="delete" href="#"><img src="{% static "delete_icon.png" %}"></a>
+                    </div>
+                {% endfor %}
+{#                <div class="item">#}
+{#                    {{ form.as_ul }}<a class="delete" href="#"><img src="{% static "delete_icon.png" %}"></a>#}
+{#                </div>#}
             {% endfor %}
         {% endif %}
 

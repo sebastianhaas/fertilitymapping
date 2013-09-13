@@ -1,36 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="932624997">
-    <data-source source="LOCAL" name="Ubuntu Home PostgreSQL" product="PostgreSQL" version="9.1.9" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.1 JDBC4 (build 901)" uuid="d7f3352c-e1bd-4859-8369-eca03d53d49f">
+  <component name="DataSourceManagerImpl" format="xml" hash="2313056063">
+    <data-source source="LOCAL" name="Data Source" product="PostgreSQL" version="9.2.4" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.1 JDBC4 (build 901)" uuid="34ea35f8-4ae7-4c9b-af71-0c42051dfd0d">
       <identifier-quote-string>&quot;</identifier-quote-string>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://Mariannengasse:5432/fertility</jdbc-url>
-      <user-name>fertility</user-name>
-      <user-password>dfc7dfcbdfd8dfd9dfc2dfc7dfcbdfc6dfc6dfc5dfdd</user-password>
+      <jdbc-url>jdbc:postgresql://localhost/fertility</jdbc-url>
+      <user-name>fertilityuser</user-name>
+      <user-password>dfccdfcfdfd8dfdedfc3dfc6dfc3dfdedfd3</user-password>
       <schema-pattern>fertility.public</schema-pattern>
       <default-dialect>PostgreSQL</default-dialect>
       <libraries>
         <library>
-          <url>jar://$PROJECT_DIR$/postgresql-9.1-901.jdbc4.jar!/</url>
-        </library>
-        <library>
-          <url>file://$PROJECT_DIR$/postgresql-driver-license.txt</url>
-        </library>
-      </libraries>
-    </data-source>
-    <data-source source="LOCAL" name="Django default" product="PostgreSQL" version="9.2.4" jdbc-version="3.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.1 JDBC3 (build 901)" uuid="06c11097-5243-4838-850b-206b16acfa51">
-      <identifier-quote-string>&quot;</identifier-quote-string>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql:fertility</jdbc-url>
-      <user-name>fertilityuser</user-name>
-      <user-password>dfccdfcfdfd8dfdedfc3dfc6dfc3dfdedfd3</user-password>
-      <libraries>
-        <library>
-          <url>file://$USER_HOME$/.PyCharm20/config/jdbc-drivers/postgresql-driver-license.txt</url>
-        </library>
-        <library>
-          <url>file://$USER_HOME$/.PyCharm20/config/jdbc-drivers/postgresql-9.1-901.jdbc3.jar</url>
+          <url>file://$PROJECT_DIR$/postgresql-9.1-901.jdbc4.jar</url>
         </library>
       </libraries>
     </data-source>
