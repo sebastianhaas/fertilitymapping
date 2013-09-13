@@ -42,6 +42,10 @@ class FertilityWizard(SessionWizardView):
         record.menstrual_cycle = form_dict['deviance']
         record.save()
 
+        # add pregnancy outcomes
+        for value in form_dict['pregnancy_outcome'].values():
+            record.pregnancy_set.create(outcome=value)
+
         self.request.session['result_id'] = record.id
         return HttpResponseRedirect('/result/')
 
@@ -95,6 +99,7 @@ class ResultView(View):
         tsh_rating = self.rate_thyroid_stimulating_hormone(record.tsh)
         estrogen_rating = self.rate_estrogen(record.estrogen)
         menstrual_rating = self.rate_menstrual_cycle(record.menstrual_cycle)
+        pregnancy_rating = self.rate_pregnancy_outcomes(record.pregnancy_set.all())
 
         #TODO Get these values from a configuration table in the database
         bmi_weighting = 1.0
@@ -103,14 +108,17 @@ class ResultView(View):
         tsh_weighting = 3.0
         estrogen_weighting = 1.0
         menstrual_weighting = 1.0
+        pregnancy_weighting = 1.0
 
         factor = (((bmi_rating * bmi_weighting) +
                    (amh_rating * amh_weighting) +
                    (fsh_rating * fsh_weighting) +
                    (tsh_rating * tsh_weighting) +
                    (estrogen_rating * estrogen_weighting) /
-                   (menstrual_rating * menstrual_weighting)) /
-                  (bmi_weighting + amh_weighting + fsh_weighting + tsh_weighting + estrogen_weighting))
+                   (menstrual_rating * menstrual_weighting) /
+                   (pregnancy_rating * pregnancy_weighting)) /
+                  (bmi_weighting + amh_weighting + fsh_weighting + tsh_weighting +
+                   estrogen_weighting + menstrual_weighting + pregnancy_weighting))
 
         return factor * calculate_age(record.patient.birthday)
 
@@ -217,6 +225,14 @@ class ResultView(View):
             self.debug_ratings['menstrual_cycle'] = result
 
         return result
+
+    def rate_pregnancy_outcomes(self, pregnancy_outcomes):
+
+        if settings.DEBUG:
+            self.debug_vars['pregnancy_outcome'] = pregnancy_outcomes
+            self.debug_ratings['pregnancy_outcome'] = 1
+
+        return 1
 
 
 # This class is used to make empty formset forms required

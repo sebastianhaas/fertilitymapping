@@ -32,6 +32,9 @@ class Pregnancy(models.Model):
     outcome = models.ForeignKey(PregnancyOutcome)
     record = models.ForeignKey(Record)
 
+    def __unicode__(self):
+        return u'%s' % self.outcome
+
 
 # class Spermiogram(models.Model):
 #     volume = models.PositiveIntegerField()  # microlitre, µ/L [10^-6 L]

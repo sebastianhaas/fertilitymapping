@@ -24,32 +24,41 @@
             <tr>
                 <td>{% trans "BMI" %}</td>
                 <td>{{ debug_vars.bmi|floatformat:2 }}</td>
-                <td>{{ debug_rating.bmi }}</td>
+                <td>{{ debug_ratings.bmi }}</td>
             </tr>
             <tr>
                 <td>{% trans "AMH" %}</td>
                 <td>{{ debug_vars.amh|floatformat:2 }}</td>
-                <td>{{ debug_rating.amh }}</td>
+                <td>{{ debug_ratings.amh }}</td>
             </tr>
             <tr>
                 <td>{% trans "FSH" %}</td>
                 <td>{{ debug_vars.fsh|floatformat:2 }}</td>
-                <td>{{ debug_rating.fsh }}</td>
+                <td>{{ debug_ratings.fsh }}</td>
             </tr>
             <tr>
                 <td>{% trans "TSH" %}</td>
                 <td>{{ debug_vars.tsh|floatformat:2 }}</td>
-                <td>{{ debug_rating.tsh }}</td>
+                <td>{{ debug_ratings.tsh }}</td>
             </tr>
             <tr>
                 <td>{% trans "Estrogen" %}</td>
                 <td>{{ debug_vars.estrogen|floatformat:2 }}</td>
-                <td>{{ debug_rating.estrogen }}</td>
+                <td>{{ debug_ratings.estrogen }}</td>
             </tr>
             <tr>
                 <td>{% trans "Menstrual Cycle" %}</td>
                 <td>{{ debug_vars.menstrual_cycle|floatformat:2 }}</td>
-                <td>{{ debug_rating.menstrual_cycle }}</td>
+                <td>{{ debug_ratings.menstrual_cycle }}</td>
+            </tr>
+            <tr>
+                <td>{% trans "Pregnancies" %}</td>
+                <td>
+                    {% for item in debug_vars.pregnancy_outcome %}
+                        {{ item }}{% if not forloop.last %}, {% endif %}<br>
+                    {% endfor %}
+                </td>
+                <td>{{ debug_ratings.pregnancy_outcome }}</td>
             </tr>
         </table>
     {% endif %}
