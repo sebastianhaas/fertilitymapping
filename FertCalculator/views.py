@@ -216,6 +216,8 @@ class ResultView(View):
         return result
 
     def rate_pregnancy_outcomes(self, pregnancy_outcomes):
+        for pregnancy in pregnancy_outcomes:
+            pregnancy.outcome
 
         if settings.DEBUG:
             self.debug_vars['pregnancy_outcome'] = pregnancy_outcomes

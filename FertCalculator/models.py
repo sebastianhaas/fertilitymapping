@@ -63,3 +63,8 @@ class Pregnancy(models.Model):
 #     record = models.ForeignKey(Record)
 
 
+# SECTION CONFIGURATION MODELS
+
+class RatingPregnancyOutcome(models.Model):
+    outcome = models.ForeignKey(PregnancyOutcome)
+    rating = models.DecimalField(max_digits=4, decimal_places=3)
