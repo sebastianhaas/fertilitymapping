@@ -36,6 +36,7 @@ class RegularityOfTheMenstrualCycleForm(forms.Form):
 
 class PrecedingPregnancyForm(forms.Form):
     pregnancies = forms.BooleanField(required=False)
+    contraception = forms.BooleanField(required=False)
 
 
 class RegularityOfIntercourse(forms.Form):

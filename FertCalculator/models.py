@@ -42,6 +42,7 @@ class Record(models.Model):
     menstrual_cycle = models.PositiveSmallIntegerField()  # deviance in days
     regularity_of_intercourse = models.CharField(max_length=3, choices=REGULARITY_OF_INTERCOURSE_CHOICES,
                                                  default=DEFAULT)
+    contraception = models.BooleanField()
 
 
 class Pregnancy(models.Model):
