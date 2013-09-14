@@ -20,12 +20,13 @@
                 {{ wizard.form }}
             {% endif %}
         </table>
+        <br><br>
         {% if wizard.steps.prev %}
-            <button name="wizard_goto_step" type="submit"
+            <button name="wizard_goto_step" class="wkoButton" type="submit"
                     value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
-            <button name="wizard_goto_step" type="submit"
+            <button name="wizard_goto_step" class="wkoButton" type="submit"
                     value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
         {% endif %}
-        <input type="submit" value="{% trans "submit" %}"/>
+        <input class="wkoButton" type="submit" value="{% trans "submit" %}"/>
     </form>
 {% endblock %}

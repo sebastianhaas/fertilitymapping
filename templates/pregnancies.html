@@ -17,16 +17,18 @@
                 {% for field in form %}
                     <div class="item">
                         {{ field.errors }}
-                        {{ field.label_tag }}: {{ field }}<a class="delete" href="#"><img src="{% static "delete_icon.png" %}"></a>
+                        {{ field.label_tag }}: {{ field }}<a class="delete" href="#"><img
+                            src="{% static "delete_icon.png" %}"></a>
                     </div>
                 {% endfor %}
-{#                <div class="item">#}
-{#                    {{ form.as_ul }}<a class="delete" href="#"><img src="{% static "delete_icon.png" %}"></a>#}
-{#                </div>#}
+                {#                <div class="item">#}
+                {#                    {{ form.as_ul }}<a class="delete" href="#"><img src="{% static "delete_icon.png" %}"></a>#}
+                {#                </div>#}
             {% endfor %}
         {% endif %}
 
         <p><a id="add" href="#">Add another item</a></p>
+        <br><br>
         {% if wizard.steps.prev %}
             <button name="wizard_goto_step" type="submit"
                     value="{{ wizard.steps.first }}">{% trans "first step" %}</button>

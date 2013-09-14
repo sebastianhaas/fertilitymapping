@@ -105,9 +105,9 @@ class ResultView(View):
                    (amh_rating * amh_weighting) +
                    (fsh_rating * fsh_weighting) +
                    (tsh_rating * tsh_weighting) +
-                   (estrogen_rating * estrogen_weighting) /
-                   (menstrual_rating * menstrual_weighting) /
-                   (pregnancy_rating * pregnancy_weighting) /
+                   (estrogen_rating * estrogen_weighting) +
+                   (menstrual_rating * menstrual_weighting) +
+                   (pregnancy_rating * pregnancy_weighting) +
                    (regularity_rating * regularity_weighting)) /
                   (bmi_weighting + amh_weighting + fsh_weighting + tsh_weighting +
                    estrogen_weighting + menstrual_weighting + pregnancy_weighting + regularity_weighting))
@@ -238,7 +238,8 @@ class ResultView(View):
         ratings_map = {Record.MORE_THAN_TWO_TIMES_A_WEEK: 1,
                        Record.TWO_TIMES_A_WEEK: 1.01,
                        Record.ONCE_A_WEEK: 1.1,
-                       Record.ONCE_A_MONTH: 1.2}
+                       Record.ONCE_A_MONTH: 1.2,
+                       Record.NO_INTERCOURSE: 1.2}
         rating = ratings_map.get(regularity, 1)
 
         if settings.DEBUG:

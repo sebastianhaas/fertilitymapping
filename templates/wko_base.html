@@ -5,8 +5,10 @@
 <html>
 <head>
     <link rel="stylesheet" href="{% static "wko_design.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/wko/jquery-ui-1.10.3.custom.css" %}"/>
     <title>{% block title %}{% endblock %}</title>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="{% static "js/jquery-1.9.1.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery-ui-1.10.3.custom.min.js" %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -19,6 +21,15 @@
                 if (el.id) el.id = el.id.replace(id_regex, replacement);
                 if (el.name) el.name = el.name.replace(id_regex, replacement);
             }
+
+            $(function () {
+                $(".datePicker").datepicker({
+                    changeYear: true,
+                    yearRange: "c-60:c+10",
+                    defaultDate: "-25y",
+                    dateFormat: "yy-mm-dd"
+                });
+            });
 
             function deleteForm(btn, prefix) {
                 var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());

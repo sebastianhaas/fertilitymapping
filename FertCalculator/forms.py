@@ -1,12 +1,12 @@
 # coding=utf-8
 
 from django import forms
-from django.forms import RadioSelect
+from django.forms import RadioSelect, models
 from FertCalculator.models import Pregnancy, Record
 
 
 class NewUserForm(forms.Form):
-    birthday = forms.DateField()
+    birthday = forms.DateField(widget=forms.TextInput(attrs={'class': 'datePicker'}))
     height = forms.IntegerField(min_value=50, max_value=250)
 
 
