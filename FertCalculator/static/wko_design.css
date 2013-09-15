@@ -35,6 +35,11 @@ body {
     right: 50px;
 }
 
+.item {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
 .wkoButton {
 
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));

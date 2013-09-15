@@ -17,8 +17,10 @@
                 {% for field in form %}
                     <div class="item">
                         {{ field.errors }}
-                        {{ field.label_tag }}: {{ field }}<a class="delete" href="#"><img
-                            src="{% static "delete_icon.png" %}"></a>
+                        {{ field.label_tag }}: {{ field }}
+                    <div style="display: inline-block">
+                    <a class="delete" href="#"><span class="ui-icon ui-icon-circle-minus"></span></a>
+                    </div>
                     </div>
                 {% endfor %}
                 {#                <div class="item">#}
@@ -27,14 +29,14 @@
             {% endfor %}
         {% endif %}
 
-        <p><a id="add" href="#">Add another item</a></p>
+        <p><a id="add" href="#"><span class="ui-icon ui-icon-circle-plus">Add</span></a></p>
         <br><br>
         {% if wizard.steps.prev %}
-            <button name="wizard_goto_step" type="submit"
+            <button name="wizard_goto_step" class="wkoButton" type="submit"
                     value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
-            <button name="wizard_goto_step" type="submit"
+            <button name="wizard_goto_step" class="wkoButton" type="submit"
                     value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
         {% endif %}
-        <input type="submit" value="{% trans "submit" %}"/>
+        <input class="wkoButton" type="submit" value="{% trans "submit" %}"/>
     </form>
 {% endblock %}
