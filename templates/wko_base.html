@@ -74,7 +74,7 @@
                     $(row).children().removeClass('error');
 
                     // Relabel/rename all the relevant bits
-                    $(row).children().children().each(function () {
+                    $(row).children().each(function () {
                         updateElementIndex(this, prefix, formCount);
                         if ($(this).attr('type') == 'text')
                             $(this).val('');
