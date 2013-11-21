@@ -35,7 +35,7 @@ class Record(models.Model):
     patient = models.ForeignKey(Patient)
     datetime = models.DateTimeField(auto_now=True)
     weight = models.DecimalField(max_digits=4, decimal_places=1)  # kg
-    amh = models.PositiveSmallIntegerField()  # nanogram per millilitre, ng/mL
+    amh = models.DecimalField(max_digits=3, decimal_places=1)  # nanogram per millilitre, ng/mL
     fsh = models.DecimalField(max_digits=5, decimal_places=2)  # international units per litre, IU/L
     tsh = models.DecimalField(max_digits=3, decimal_places=1)  # micro-international units per millilitre
     estrogen = models.SmallIntegerField()  # pg/mL
@@ -51,16 +51,6 @@ class Pregnancy(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.outcome
-
-
-# class Spermiogram(models.Model):
-#     volume = models.PositiveIntegerField()  # microlitre, µ/L [10^-6 L]
-#     ph = models.DecimalField(max_digits=3, decimal_places=1)
-#     spermcount = models.PositiveIntegerField()  # millions per millilitre
-#     totalspermcount = models.PositiveIntegerField()
-#     motility = models.PositiveSmallIntegerField()  # percent
-#     morphology = models.PositiveSmallIntegerField()  # percent
-#     record = models.ForeignKey(Record)
 
 
 # SECTION CONFIGURATION MODELS

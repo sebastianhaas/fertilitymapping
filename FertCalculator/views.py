@@ -6,8 +6,8 @@ from django.shortcuts import render
 from django.views.generic.base import View
 from django.conf import settings
 from django.forms.formsets import BaseFormSet
-from FertCalculator.models import *
-from FertCalculator.utils import *
+from fertcalculator.models import *
+from fertcalculator.utils import *
 from decimal import *
 import os
 import binascii
@@ -115,7 +115,8 @@ class ResultView(View):
         return factor * calculate_age(record.patient.birthday)
 
     def rate_body_mass_index(self, height, weight):
-        bmi = weight / ((height / Decimal(100.0)) * (height / Decimal(100.0)))
+        decimal_height = height
+        bmi = weight / ((decimal_height / Decimal('100.0')) * (decimal_height / Decimal('100.0')))
 
         if 24.99 >= bmi >= 18.5:
             result = 1

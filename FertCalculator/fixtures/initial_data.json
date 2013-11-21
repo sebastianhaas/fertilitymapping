@@ -1,62 +1,62 @@
 [
     {
-        "model": "FertCalculator.pregnancyoutcome",
+        "model": "fertcalculator.pregnancyoutcome",
         "pk": 1,
         "fields": {
             "name": "Erfolgreiche Geburt"
         }
     },
     {
-        "model": "FertCalculator.pregnancyoutcome",
+        "model": "fertcalculator.pregnancyoutcome",
         "pk": 2,
         "fields": {
             "name": "Eileiterschwangerschaft"
         }
     },
     {
-        "model": "FertCalculator.pregnancyoutcome",
+        "model": "fertcalculator.pregnancyoutcome",
         "pk": 3,
         "fields": {
             "name": "Abort vor der 14. Woche"
         }
     },
     {
-        "model": "FertCalculator.pregnancyoutcome",
+        "model": "fertcalculator.pregnancyoutcome",
         "pk": 4,
         "fields": {
             "name": "Abort nach der 14. Woche"
         }
     },
     {
-        "model": "FertCalculator.ratingpregnancyoutcome",
+        "model": "fertcalculator.ratingpregnancyoutcome",
         "pk": 1,
         "fields": {
             "outcome": 1,
-            "rating": 0
+            "rating": "0"
         }
     },
     {
-        "model": "FertCalculator.ratingpregnancyoutcome",
+        "model": "fertcalculator.ratingpregnancyoutcome",
         "pk": 2,
         "fields": {
             "outcome": 2,
-            "rating": 0
+            "rating": "0"
         }
     },
     {
-        "model": "FertCalculator.ratingpregnancyoutcome",
+        "model": "fertcalculator.ratingpregnancyoutcome",
         "pk": 3,
         "fields": {
             "outcome": 3,
-            "rating": 0.005
+            "rating": "0.005"
         }
     },
     {
-        "model": "FertCalculator.ratingpregnancyoutcome",
+        "model": "fertcalculator.ratingpregnancyoutcome",
         "pk": 4,
         "fields": {
             "outcome": 4,
-            "rating": 0.115
+            "rating": "0.115"
         }
     }
 ]

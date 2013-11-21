@@ -1,6 +1,6 @@
 # coding=utf-8
 
-# Django settings for Fertility project.
+# Django settings for fertility project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -110,10 +110,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'Fertility.urls'
+ROOT_URLCONF = 'fertility.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'Fertility.wsgi.application'
+WSGI_APPLICATION = 'fertility.wsgi.application'
 
 import os
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),)
@@ -129,7 +129,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'FertCalculator',
+    'fertcalculator',
 )
 
 # A sample logging configuration. The only tangible logging

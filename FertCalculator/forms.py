@@ -2,7 +2,7 @@
 
 from django import forms
 from django.forms import RadioSelect, models
-from FertCalculator.models import Pregnancy, Record
+from fertcalculator.models import Pregnancy, Record
 
 
 class NewUserForm(forms.Form):

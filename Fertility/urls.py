@@ -3,7 +3,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.forms.formsets import formset_factory
-from FertCalculator import views, forms
+from fertcalculator import views, forms
 
 admin.autodiscover()
 
